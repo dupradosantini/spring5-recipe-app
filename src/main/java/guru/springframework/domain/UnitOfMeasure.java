@@ -1,9 +1,16 @@
 package guru.springframework.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+/**
+ * Created by jt on 6/13/17.
+ */
 @Entity
 public class UnitOfMeasure {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,7 +28,7 @@ public class UnitOfMeasure {
         return description;
     }
 
-    public void setDescription(String unit) {
-        this.description = unit;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

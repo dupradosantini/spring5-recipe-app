@@ -1,12 +1,16 @@
 package guru.springframework.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Created by jt on 6/13/17.
+ */
 @Entity
 public class Recipe {
 
-    @Id // Every Entity Needs an ID
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -16,33 +20,27 @@ public class Recipe {
     private Integer servings;
     private String source;
     private String url;
-    private String directions;
-    //todo add
-    //private Difficulty difficulty
-    @Lob //Large Objects Annotation
-    private Byte[] image;
 
-    @OneToOne(cascade= CascadeType.ALL)// Defining the relationship type and cascade method
-    private Notes notes;
+    @Lob
+    private String directions;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredients;
+    private Set<Ingredient> ingredients = new HashSet<>();
 
-    //The enumType is important, defines how the DB persists the data
-    //ordinal is just numbers, string is what you actually wronte in the enumeration class
-    //If its ordinal and you add a new ENUM, all the other numbers change aswell reflecting on the whole DB
+    @Lob
+    private Byte[] image;
+
     @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
 
-    @ManyToMany
-    @JoinTable(name="recipe_category",
-                joinColumns = @JoinColumn(name="recipe_id"),
-                inverseJoinColumns = @JoinColumn(name="category_id"))
-    private Set<Category> categories;/* All many to many require new table to model them,
-    the @JoinTable annotation defines how the DB will do that, we specified the table name,
-    and which columns represent the join criteria */
+    @OneToOne(cascade = CascadeType.ALL)
+    private Notes notes;
 
-    //Getters and Setters
+    @ManyToMany
+    @JoinTable(name = "recipe_category",
+        joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories = new HashSet<>();
 
     public Long getId() {
         return id;
