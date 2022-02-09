@@ -1,6 +1,6 @@
 package guru.springframework.domain;
 
-import lombok.*;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,7 +9,6 @@ import java.util.Set;
 /**
  * Created by jt on 6/13/17.
  */
-
 @Data
 @Entity
 public class Recipe {
@@ -46,14 +45,14 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
-    public Recipe addIngredient(Ingredient ingredient){
-        ingredient.setRecipe(this);
-        this.ingredients.add(ingredient);
-        return this;
-    }
     public void setNotes(Notes notes) {
         this.notes = notes;
         notes.setRecipe(this);
     }
 
+    public Recipe addIngredient(Ingredient ingredient){
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
+        return this;
+    }
 }

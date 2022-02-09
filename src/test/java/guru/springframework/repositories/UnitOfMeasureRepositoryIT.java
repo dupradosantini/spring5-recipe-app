@@ -10,13 +10,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
+/**
+ * Created by jt on 6/17/17.
+ */
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class UnitOfMeasureRepositoryIT {
-    /* This test boots the whole Spring context and
-    looks for a database entry for Teaspoon
-    on the unit of measures table */
 
     @Autowired
     UnitOfMeasureRepository unitOfMeasureRepository;
@@ -26,12 +27,19 @@ public class UnitOfMeasureRepositoryIT {
     }
 
     @Test
-    //@DirtiesContext // This anottation restart the Spring context in case the tests interfere with the following ones.
-    public void findByDescription() {
+    public void findByDescription() throws Exception {
+
         Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
+
         assertEquals("Teaspoon", uomOptional.get().getDescription());
     }
 
-    //Once the context in Up and Running we can test for other entries, like Cup or Tablespoon very quickly
-    //because the lenghty proccess that is booting up Spring has already been done.
+    @Test
+    public void findByDescriptionCup() throws Exception {
+
+        Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription("Cup");
+
+        assertEquals("Cup", uomOptional.get().getDescription());
+    }
+
 }
