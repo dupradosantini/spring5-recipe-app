@@ -60,4 +60,10 @@ public class RecipeServiceImpl implements RecipeService {
         //returns an instance of the saved object for us to convert back
         return recipeToRecipeCommand.convert(savedRecipe);
     }
+
+    @Override
+    @Transactional
+    public RecipeCommand findCommandById(Long l){
+        return recipeToRecipeCommand.convert(findById(l));
+    }
 }

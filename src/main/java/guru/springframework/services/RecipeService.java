@@ -16,4 +16,6 @@ public interface RecipeService {
 
     //Persisting the Command object in the DB
     RecipeCommand saveRecipeCommand(RecipeCommand command);
+
+    RecipeCommand findCommandById(Long l);
 }

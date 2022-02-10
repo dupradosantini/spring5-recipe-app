@@ -14,7 +14,7 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
 
-    @RequestMapping("/recipe/show/{id}")
+    @RequestMapping("/recipe/{id}/show")
     public String showById(@PathVariable String id, Model model){
         model.addAttribute("recipe", recipeService.findById(Long.valueOf(id)));
         return "recipe/show";
@@ -27,11 +27,16 @@ public class RecipeController {
     }
     //@RequestMapping(name="recipe", method = RequestMethod.POST) //Tried and tested way to do this
     //New Way
-    @PostMapping
-    @RequestMapping("recipe")
-    public String saveOrUpdate(@ModelAttribute RecipeCommand command){ //Binding
+    //if the ID value is not populated Spring knows its a new one otherwise its an update
+    @PostMapping("recipe")//only allows post in this url
+    public String saveOrUpdate(@ModelAttribute RecipeCommand command){
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
-        //This return will redirect to the recipe saved.
-        return"redirect:/recipe/show/" + savedCommand.getId();
+
+        return "redirect:/recipe/" + savedCommand.getId() + "/show";
+    }
+    @RequestMapping("recipe/{id}/update")
+    public String updateRecipe(@PathVariable String id, Model model){
+        model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(id)));
+        return "recipe/recipeform";
     }
 }
