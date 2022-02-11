@@ -14,10 +14,9 @@ public interface RecipeService {
 
     Recipe findById(Long l);
 
-    //Persisting the Command object in the DB
-    RecipeCommand saveRecipeCommand(RecipeCommand command);
-
     RecipeCommand findCommandById(Long l);
+
+    RecipeCommand saveRecipeCommand(RecipeCommand command);
 
     void deleteById(Long idToDelete);
 }

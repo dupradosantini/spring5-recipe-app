@@ -21,17 +21,17 @@ public class UnitOfMeasureCommandToUnitOfMeasureTest {
     }
 
     @Test
-    public void testNullParamter() throws Exception { //Tests if the parameter has no object
+    public void testNullParamter() throws Exception {
         assertNull(converter.convert(null));
     }
 
     @Test
-    public void testEmptyObject() throws Exception { //Tests if the new object is empty
+    public void testEmptyObject() throws Exception {
         assertNotNull(converter.convert(new UnitOfMeasureCommand()));
     }
 
     @Test
-    public void convert() throws Exception {//Tests if the values are being set properties
+    public void convert() throws Exception {
         //given
         UnitOfMeasureCommand command = new UnitOfMeasureCommand();
         command.setId(LONG_VALUE);

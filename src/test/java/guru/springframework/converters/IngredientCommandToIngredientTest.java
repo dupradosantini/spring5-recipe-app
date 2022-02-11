@@ -22,7 +22,7 @@ public class IngredientCommandToIngredientTest {
     IngredientCommandToIngredient converter;
 
     @Before
-    public void setUp() throws Exception { //This has a dependency on UoM so it need a UoM Object (both ways)
+    public void setUp() throws Exception {
         converter = new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure());
     }
 
@@ -78,7 +78,6 @@ public class IngredientCommandToIngredientTest {
         assertEquals(ID_VALUE, ingredient.getId());
         assertEquals(AMOUNT, ingredient.getAmount());
         assertEquals(DESCRIPTION, ingredient.getDescription());
-
     }
 
 }
